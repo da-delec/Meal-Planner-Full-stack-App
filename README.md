@@ -1,3 +1,21 @@
+This is a full stack web app , using next JS , Tailwind , SQlite, and prisma.
+Next auth for authentication.
+You can create a Weeks , then add some recipes for the days of the weeks , and finaly save it , or just print it.
+speacial feature for Admin users , who can access an Admin Dashboard et block user , or delete , or get any users informations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

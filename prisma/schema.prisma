@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  firstName     String?
+  lastName      String?
+  profileImage  String?
+  isBlocked     Boolean   @default(false)
+  role          Role      @default(USER)
+  isVerified    Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  mealWeeks     MealWeek[]
+}
+
+model MealWeek {
+  id        String   @id @default(cuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  days      MealDay[]
+}
+
+enum DayOfWeek {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+}
+
+model MealDay {
+  id          String    @id @default(cuid())
+  dayOfWeek   DayOfWeek
+  breakfast   String?
+  lunch       String?
+  dinner      String?
+  mealWeek    MealWeek  @relation(fields: [mealWeekId], references: [id])
+  mealWeekId  String
+}
+
+enum Role {
+  USER
+  ADMIN
+}
